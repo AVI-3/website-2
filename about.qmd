@@ -1,5 +1,9 @@
 ---
 title: "About"
 ---
+## About Me
 
-About this site
+Hello! I'm **Avinesh Saravana**, and I attend *Solon High School*.
+
+
+[Kane's Free Data Science Bootcamp](https://bootcamp.davidkane.info)
