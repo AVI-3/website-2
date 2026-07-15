@@ -1,0 +1,41 @@
+---
+title: "Billboard Graphic"
+execute:
+  echo: false
+---
+
+```{r}
+suppressPackageStartupMessages(library(tidyverse))
+```
+
+```{r}
+billboard |>
+  slice_min(wk1, n = 6, with_ties = FALSE) |>
+  pivot_longer(
+    starts_with("wk"),
+    names_to = "week",
+    values_to = "rank",
+    values_drop_na = TRUE
+  ) |>
+  mutate(week = readr::parse_number(week)) |>
+  ggplot(aes(x = week, y = rank, color = track, group = track)) +
+  geom_line(linewidth = 1.2, alpha = 0.9) +
+  geom_point(size = 2.5) +
+  scale_y_reverse(limits = c(100, 1), breaks = seq(100, 1, by = -20)) +
+  scale_color_brewer(palette = "Dark2") +
+  labs(
+    title = "Chart Paths for the 1999 Billboard Top Tracks",
+    subtitle = "Lower ranks mean a better position on the chart",
+    x = "Week",
+    y = "Chart rank",
+    color = NULL
+  ) +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 18),
+    plot.subtitle = element_text(color = "gray35"),
+    panel.grid.minor = element_blank(),
+    legend.position = "none"
+  )
+```
+
